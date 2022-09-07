@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
-    private static final String TAG = "TAG";
+    public static final String TAG = "TAG 1";
     PendingIntent notificationPendingIntent;
     private String title;
     private String body;

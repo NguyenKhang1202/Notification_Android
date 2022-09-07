@@ -2,6 +2,7 @@ package vn.edu.hust.sis.khangnv.notifyme;
 
 import static vn.edu.hust.sis.khangnv.notifyme.MyApplication.CHANNEL_ID;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
@@ -13,8 +14,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 
 public class MainActivity extends AppCompatActivity {
     private Button button_notify;
@@ -22,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button_update;
     private NotificationManager mNotifyManager;
     public static final int NOTIFICATION_ID = 0;
+    private static final String TAG = "TAG";
     PendingIntent notificationPendingIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +62,24 @@ public class MainActivity extends AppCompatActivity {
                 cancelNotification();
             }
         });
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        // Log and toast
+                        Log.d(TAG, token);
+                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         /*createNotificationChannel();*/
     }
