@@ -32,11 +32,14 @@ public class MainActivity extends AppCompatActivity {
         createNotificationChannel();
     }
 
+    // gửi notification bằng cách dùng đtg NotificationManager dùng hàm notify()
     public void sendNotification() {
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
     }
 
+    // tạo đối tượng builder cho từng notification
+    // nó như data cho notification
     private NotificationCompat.Builder getNotificationBuilder(){
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
                 .setContentTitle("You've been notified!")
@@ -45,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         return notifyBuilder;
     }
 
+    // tạo channel cho notification
+    // mỗi channel có 1 id riêng, cài đặt các attr cho channel: am thanh, rung,...
+    // sử dụng NotificationManager dể tạo
     public void createNotificationChannel()
     {
         mNotifyManager = (NotificationManager)
