@@ -7,6 +7,8 @@ import androidx.core.app.NotificationCompat;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -16,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button_notify;
     /*private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";*/
     private NotificationManager mNotifyManager;
-    private static final int NOTIFICATION_ID = 0;
-
+    public static final int NOTIFICATION_ID = 0;
+    PendingIntent notificationPendingIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     // gửi notification bằng cách dùng đtg NotificationManager dùng hàm notify()
     public void sendNotification() {
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        notificationPendingIntent = PendingIntent.getActivity(this,
+                NOTIFICATION_ID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         // get NotificationManager từ hệ thống
         mNotifyManager = (NotificationManager)
                 getSystemService(NOTIFICATION_SERVICE);
@@ -49,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("You've been notified!")
                 .setContentText("This is your notification text.")
-                .setSmallIcon(R.drawable.ic_android);
+                .setSmallIcon(R.drawable.ic_android)
+                .setContentIntent(notificationPendingIntent)
+                .setAutoCancel(true);
         return notifyBuilder;
     }
 
