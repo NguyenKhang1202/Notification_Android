@@ -9,6 +9,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +18,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private Button button_notify;
-    /*private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";*/
+    private Button button_cancel;
+    private Button button_update;
     private NotificationManager mNotifyManager;
     public static final int NOTIFICATION_ID = 0;
     PendingIntent notificationPendingIntent;
@@ -33,7 +36,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        button_update = findViewById(R.id.update);
+        button_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Update the notification
+                updateNotification();
+            }
+        });
+
+        button_cancel = findViewById(R.id.cancel);
+        button_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Cancel the notification
+                cancelNotification();
+            }
+        });
+
         /*createNotificationChannel();*/
+    }
+
+    public void updateNotification() {
+        Bitmap androidImage = BitmapFactory
+                .decodeResource(getResources(), R.drawable.mascot_1);
+        NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
+
+        notifyBuilder.setStyle(new NotificationCompat.BigPictureStyle()
+                .bigPicture(androidImage)
+                .setBigContentTitle("Notification Updated!"));
+
+        mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
+    }
+
+    public void cancelNotification() {
+        mNotifyManager.cancel(NOTIFICATION_ID);
     }
 
     // gửi notification bằng cách dùng đtg NotificationManager dùng hàm notify()
@@ -56,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
                 .setContentText("This is your notification text.")
                 .setSmallIcon(R.drawable.ic_android)
                 .setContentIntent(notificationPendingIntent)
-                .setAutoCancel(true);
+                .setAutoCancel(true)
+                .setDefaults(NotificationCompat.DEFAULT_ALL);
         return notifyBuilder;
     }
 
