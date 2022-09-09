@@ -33,6 +33,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Log.d(TAG, "From: " + remoteMessage.getFrom());
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            Map<String, String> data = remoteMessage.getData();
+            Log.d(TAG, "field 1: " + data.get("username"));
+            Log.d(TAG, "field 2: " + data.get("password"));
+
         }
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
