@@ -3,6 +3,7 @@ package vn.edu.hust.sis.khangnv.notifyme;
 import static vn.edu.hust.sis.khangnv.notifyme.MyApplication.CHANNEL_ID;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
@@ -15,6 +16,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -81,7 +84,37 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        /*createNotificationChannel();*/
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mymenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.menu1:
+                //code xử lý khi bấm menu1
+                Log.d(TAG, "An vao image home");
+                break;
+            case R.id.menu2:
+                //code xử lý khi bấm menu2
+                Log.d(TAG, "An vao icon lock");
+                break;
+            case R.id.menu3:
+                //code xử lý khi bấm menu3
+                Log.d(TAG, "An vao three dot");
+                break;
+            default:break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void updateNotification() {

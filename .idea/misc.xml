@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Project_Android/NotifyMe/app/src/main/res/layout/activity_main.xml" value="0.2234375" />
+        <entry key="..\:/Project_Android/NotifyMe/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Project_Android/NotifyMe/app/src/main/res/layout/activity_second.xml" value="0.2234375" />
+        <entry key="..\:/Project_Android/NotifyMe/app/src/main/res/layout/activity_sign_in.xml" value="0.16" />
+        <entry key="..\:/Project_Android/NotifyMe/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="..\:/Project_Android/NotifyMe/app/src/main/res/menu/mymenu.xml" value="0.22239583333333332" />
+        <entry key="..\:/Users/DELL/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.2234375" />
       </map>
     </option>
   </component>

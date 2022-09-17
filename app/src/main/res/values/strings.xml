@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Notify Me</string>
+    <string-array name="size_entries">
+        <item>Home</item>
+        <item>Work</item>
+        <item>Mobile</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="size_values">
+        <item>12</item>
+        <item>16</item>
+        <item>20</item>
+        <item>24</item>
+    </string-array>
 </resources>
